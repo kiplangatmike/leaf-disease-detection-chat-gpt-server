@@ -14,7 +14,7 @@ const openai = new OpenAI({
   apiKey: apiKey,
 });
 
-router.post("/chat", async (req, res) => {
+router.post("/", async (req, res) => {
   const userPrompt = req.body.message;
   try {
     const response = await openai.chat.completions.create({
