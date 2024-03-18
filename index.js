@@ -10,9 +10,7 @@ const chatRoutes = require("./routes/chatRoutes");
 
 app.use(express.json());
 
-app.use("/", chatRoutes);
-
-
+app.use("/routes/chatRoutes", chatRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
