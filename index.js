@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const axios = require("axios");
@@ -5,12 +6,12 @@ const OpenAI = require("openai");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const KEY = process.env.OPENAI_API_KEY;
+const apiKey = process.env.OPENAI_API_KEY;
 
 app.use(express.json());
 
 const openai = new OpenAI({
-  apiKey: KEY,
+  apiKey: apiKey,
 });
 
 app.post("/", async (req, res) => {
