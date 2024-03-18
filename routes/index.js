@@ -15,21 +15,37 @@ const openai = new OpenAI({
   apiKey: apiKey,
 });
 
-app.post("/", async (req, res) => {
+app.post("/find", async (req, res) => {
   const userPrompt = req.body.message;
-
-  const response = await openai.chat.completions.create({
-    model: "gpt-3.5-turbo",
-    messages: [
-      {
-        role: "user",
-        content: userPrompt,
-      },
-    ],
-    max_tokens: 150,
-  });
-  console.log(response.choices[0].message.content);
-  res.send(response.choices[0].message.content);
+  try {
+    const response = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      messages: [
+        {
+          role: "user",
+          content: userPrompt,
+        },
+      ],
+      max_tokens: 150,
+    });
+    console.log(response.choices[0].message.content);
+    res.send(response.choices[0].message.content);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Internal Server Error");
+  }
+  // const response = await openai.chat.completions.create({
+  //   model: "gpt-3.5-turbo",
+  //   messages: [
+  //     {
+  //       role: "user",
+  //       content: userPrompt,
+  //     },
+  //   ],
+  //   max_tokens: 150,
+  // });
+  // console.log(response.choices[0].message.content);
+  // res.send(response.choices[0].message.content);
   // res.json({ reply: response.data.choices[0].text.trim() });
 
 });
